@@ -1,5 +1,8 @@
 require('dotenv').config()
 
+console.log('MongoDB URI:', process.env.MONGO_URI);
+
+
 const express = require('express')
 const mongoose = require('mongoose')
 const workoutRoutes = require('./routes/workouts')
