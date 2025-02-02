@@ -2,9 +2,11 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const token = localStorage.getItem("jwt"); // Check if user is logged in
+
     const handleLogout = () => {
-        localStorage.removeItem("jwt");
-        navigate("/login");
+        localStorage.removeItem("jwt"); // Remove token
+        navigate("/login"); // Redirect to login page
     };
 
     return (
@@ -14,13 +16,18 @@ const Navbar = () => {
                     <h1>Workout Buddy</h1>
                 </Link>
                 <nav>
-                    {localStorage.getItem("jwt") ? (
-                        <button onClick={handleLogout}>Logout</button>
-                    ) : (
+                    {!token ? (
                         <>
                             <Link to="/signup">Sign Up</Link>
                             <Link to="/login">Login</Link>
                         </>
+                    ) : (
+                        <button
+                            onClick={handleLogout}
+                            className="btn btn-outline-danger"
+                        >
+                            Logout
+                        </button>
                     )}
                 </nav>
             </div>
