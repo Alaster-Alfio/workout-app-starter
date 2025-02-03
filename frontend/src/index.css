@@ -1,102 +1,222 @@
-/* google font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&family=Fira+Sans:wght@400;600&display=swap');
 
-/* layout */
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --primary: #007BFF; 
+  --secondary: #FF4D4D; 
+  --background: #F8FAFD; 
+  --text: #222; 
+  --error: #D32F2F; 
+  --success: #388E3C;
+  --card-bg: #ffffff;
+  --border-color: #e0e0e0;
+  --shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
 }
+
 body {
-  background: #f1f1f1;
+  background: var(--background);
   margin: 0;
-  font-family: "Poppins";
+  font-family: "Nunito", sans-serif;
+  color: var(--text);
 }
+
 header {
-  background: #fff;
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  padding: 15px 0;
 }
+
 header .container {
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 10px 20px;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 header a {
-  color: #333;
+  color: var(--text);
   text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease-in-out;
 }
-.pages{
-  max-width: 1400px;
-  padding: 20px;
+
+header a:hover {
+  color: var(--primary);
+}
+
+.pages {
+  max-width: 1300px;
+  padding: 30px;
   margin: 0 auto;
 }
 
-/* homepage */
+/* Homepage */
 .home {
   display: grid;
   grid-template-columns: 3fr 1fr;
-  gap: 100px;
+  gap: 80px;
 }
+
 .workout-details {
-  background: #fff;
-  border-radius: 4px;
+  background: var(--card-bg);
+  border-radius: 12px;
   margin: 20px auto;
-  padding: 20px;
-  position: relative;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border-left: 6px solid var(--primary);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
 }
+
+.workout-details:hover {
+  transform: translateY(-4px);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 10px;
+}
+
 .workout-details h4 {
-  margin: 0 0 10px 0;
+  margin: 0 0 10px;
   font-size: 1.2em;
   color: var(--primary);
 }
+
 .workout-details p {
-  margin: 0;
-  font-size: 0.9em;
+  margin: 5px 0;
+  font-size: 1em;
   color: #555;
 }
+
 .workout-details span {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 15px;
+  right: 15px;
   cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
+  background: var(--background);
+  padding: 8px;
   border-radius: 50%;
-  color: #333;
+  color: var(--text);
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-/* new workout form */
-label, input {
+.workout-details span:hover {
+  background: var(--secondary);
+  color: #fff;
+}
+
+/* Form Styling */
+label {
+  font-weight: 600;
+  margin-bottom: 5px;
   display: block;
+  color: var(--text);
 }
+
 input {
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
+  padding: 12px;
+  margin: 8px 0;
   width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 2px solid var(--border-color);
+  border-radius: 6px;
   box-sizing: border-box;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.2s ease-in-out;
 }
+
+input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0px 0px 6px rgba(0, 123, 255, 0.2);
+}
+
 form button {
   background: var(--primary);
-  border: 0;
+  border: none;
   color: #fff;
-  padding: 10px;
-  font-family: "Poppins";
-  border-radius: 4px;
+  padding: 12px;
+  font-family: "Nunito";
+  border-radius: 6px;
   cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  font-weight: 600;
 }
+
+form button:hover {
+  background: var(--secondary);
+}
+
 div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
+  padding: 12px;
+  background: #ffdddd;
+  border: 2px solid var(--error);
   color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
+  border-radius: 6px;
+  margin: 15px 0;
 }
+
 input.error {
-  border: 1px solid var(--error);
+  border: 2px solid var(--error);
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px 15px;
+  transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+nav button {
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: "Nunito";
+  cursor: pointer;
+  font-size: 1em;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+nav button:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* Auth Forms */
+form.signup, form.login {
+  max-width: 420px;
+  margin: 50px auto;
+  padding: 25px;
+  background: var(--card-bg);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+form.signup h2, form.login h2 {
+  text-align: center;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+form.signup label, form.login label {
+  font-weight: 500;
+  color: var(--text);
+}
+
+form.signup input, form.login input {
+  margin-bottom: 15px;
+}
+
+form.signup button, form.login button {
+  width: 100%;
+  margin-top: 10px;
 }

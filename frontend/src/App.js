@@ -1,42 +1,38 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuthContext } from './hooks/useAuthContext'
 
 // pages & components
-import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
-import SignUp from "./pages/SignUp";
-import Login from "./pages/Login";
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+import Navbar from './components/Navbar'
 
 function App() {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { user } = useAuthContext()
 
-    useEffect(() => {
-        setIsAuthenticated(!!localStorage.getItem("jwt")); // Check auth status
-    }, []);
-
-    return (
-        <div className="App">
-            <BrowserRouter>
-                <Navbar />
-                <div className="pages">
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={
-                                isAuthenticated ? (
-                                    <Home />
-                                ) : (
-                                    <Navigate to="/login" />
-                                )
-                            }
-                        />
-                        <Route path="/signup" element={<SignUp />} />
-                        <Route path="/login" element={<Login />} />
-                    </Routes>
-                </div>
-            </BrowserRouter>
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar />
+        <div className="pages">
+          <Routes>
+            <Route 
+              path="/" 
+              element={user ? <Home /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/login" 
+              element={!user ? <Login /> : <Navigate to="/" />} 
+            />
+            <Route 
+              path="/signup" 
+              element={!user ? <Signup /> : <Navigate to="/" />} 
+            />
+          </Routes>
         </div>
-    );
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

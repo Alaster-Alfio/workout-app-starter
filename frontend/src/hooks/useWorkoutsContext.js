@@ -1,20 +1,12 @@
-const fetchWorkouts = async () => {
-    const token = localStorage.getItem("jwt"); // Get JWT token
-    if (!token) return;
+import { WorkoutsContext } from '../context/WorkoutContext'
+import { useContext } from 'react'
 
-    try {
-        const response = await fetch("/api/workouts", {
-            method: "GET",
-            headers: {
-                Authorization: `Bearer ${token}`, // Send JWT token in header
-            },
-        });
+export const useWorkoutsContext = () => {
+  const context = useContext(WorkoutsContext)
 
-        if (response.ok) {
-            const data = await response.json();
-            context.setWorkouts(data);
-        }
-    } catch (error) {
-        console.error("Error fetching workouts:", error);
-    }
-};
+  if (!context) {
+    throw Error('useWorkoutsContext must be used inside an WorkoutsContextProvider')
+  }
+
+  return context
+}

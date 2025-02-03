@@ -1,38 +1,37 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const Navbar = () => {
-    const navigate = useNavigate();
-    const token = localStorage.getItem("jwt"); // Check if user is logged in
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
 
-    const handleLogout = () => {
-        localStorage.removeItem("jwt"); // Remove token
-        navigate("/login"); // Redirect to login page
-    };
+  const handleLogout = () => {
+    logout();
+  };
 
-    return (
-        <header>
-            <div className="container">
-                <Link to="/">
-                    <h1>Workout Buddy</h1>
-                </Link>
-                <nav>
-                    {!token ? (
-                        <>
-                            <Link to="/signup">Sign Up</Link>
-                            <Link to="/login">Login</Link>
-                        </>
-                    ) : (
-                        <button
-                            onClick={handleLogout}
-                            className="btn btn-outline-danger"
-                        >
-                            Logout
-                        </button>
-                    )}
-                </nav>
+  return (
+    <header>
+      <div className="container">
+        <Link to="/">
+          <h1>Workout Buddy</h1>
+        </Link>
+        <nav>
+          {user ? (
+            <div>
+              <span>{user.email}</span>
+              <button onClick={handleLogout}>Sign Out</button>
             </div>
-        </header>
-    );
+          ) : (
+            <div>
+              <Link to="/login">Log In</Link>
+              <Link to="/signup">Join Now</Link>
+            </div>
+          )}
+        </nav>
+      </div>
+    </header>
+  );
 };
 
 export default Navbar;
